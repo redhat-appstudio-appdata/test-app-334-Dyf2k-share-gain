@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/instance: test-component-kejl
     spec:
       containers:
-      - image: quay.io/redhat-appstudio/test-images:56291a03b2644cbd825db6777fba9cfd
+      - image: quay.io/redhat-appstudio/test-images@sha256:dbac0353e6aa04e438c25b20c624d5cc015100d830570abbf38df9c76775aa96
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
