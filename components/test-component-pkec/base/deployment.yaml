@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: test-component-pkec
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: test-component-pkec
+    app.kubernetes.io/part-of: test-app-334
+  name: test-component-pkec
+  namespace: build-templates-e2e
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: test-component-pkec
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/instance: test-component-pkec
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/test-images:01b42482d6aa4c0880ee6f680c2e3943
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8081
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: container-image
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          tcpSocket:
+            port: 8081
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}
